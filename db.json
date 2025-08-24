@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id": "5bf7b0f6-a20e-4813-ae4a-f078cbb117fd",
+      "username": "nguyenphihung",
+      "passwordHash": "$2a$10$m8UAjK6TSEPJ/ea.Yyrp5urk0XB2Qan2vQdaLeLMzH18iefhmMIEW",
+      "token": "4c090f2b-3f2e-4a4c-aa1f-f016c38551f3",
+      "todos": [
+        {
+          "id": "4d17236b-8b86-4cc9-a540-9a9fc0d32f00",
+          "text": "hello",
+          "done": false,
+          "createdAt": "2025-08-24T08:47:37.332Z"
+        },
+        {
+          "id": "88af7d25-f17e-4a93-960b-87781e9fb5df",
+          "text": "123",
+          "done": false,
+          "createdAt": "2025-08-24T08:47:39.518Z"
+        }
+      ]
+    }
+  ]
+}
