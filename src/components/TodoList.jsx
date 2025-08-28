@@ -13,7 +13,7 @@ export default function TodoList({ todos, onToggle, onDelete }) {
   return (
     <motion.ul className="todo-list" layout>
       <AnimatePresence initial={false}>
-        {todos.map(todo => (
+        {[...todos].reverse().map(todo => (
           <motion.li
             key={todo.id}
             layout
@@ -25,10 +25,10 @@ export default function TodoList({ todos, onToggle, onDelete }) {
             transition={{ duration: 0.25, ease: 'easeOut' }}
           >
             <label>
-              <input type="checkbox" checked={todo.done} onChange={() => onToggle(todo.id)} />
+              <input type="checkbox" checked={todo.done} onChange={() => onToggle(todo._id)} />
               <span>{todo.text}</span>
             </label>
-            <motion.button whileTap={{ scale: 0.85 }} whileHover={{ rotate: 90 }} className="delete" onClick={() => onDelete(todo.id)} aria-label="Delete todo">✕</motion.button>
+            <motion.button whileTap={{ scale: 0.85 }} whileHover={{ rotate: 90 }} className="delete" onClick={() => onDelete(todo._id)} aria-label="Delete todo">✕</motion.button>
           </motion.li>
         ))}
       </AnimatePresence>
