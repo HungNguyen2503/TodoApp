@@ -84,7 +84,6 @@ body {
   display: flex;
   align-items: center;
   gap: 14px;
-  order: 2;
 }
 .gradient-text {
   background: var(--gradient-text);
@@ -131,7 +130,6 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  order: 1;
 }
 .user-chip {
   font-size: clamp(1.5rem, 4vw, 2rem);
@@ -192,9 +190,6 @@ h1 {
   font-weight: 600;
   letter-spacing: 0.5px;
   font-size: 0.95rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
   position: relative;
   overflow: hidden;
 }
@@ -458,9 +453,10 @@ h1 {
     flex-direction: column;
     align-items: stretch;
   }
-  .todo-input-form button {
+  /* .todo-input-form button {
     width: 100%;
-  }
+    
+  } */
   .theme-toggle {
     width: 42px;
     height: 42px;
@@ -480,6 +476,12 @@ h1 {
   }
   .app-footer {
     padding-bottom: 60px;
+  }
+  .header-actions {
+    order: 1;
+  }
+  .title-wrap {
+    order: 2;
   }
 }
 
