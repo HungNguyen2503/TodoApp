@@ -20,7 +20,7 @@ export default function App() {
   const [error, setError] = useState("");
   const API =
     import.meta.env.MONGODB_URI ||
-    (window.location.hostname === "localhost" ? "http://localhost:4000" : "");
+    (window.location.hostname === "localhost" ? "http://localhost:4000/api" : "");
 
   const logout = () => {
     setToken("");
@@ -48,7 +48,7 @@ export default function App() {
   const fetchTodos = async (activeToken = token) => {
     if (!activeToken) return;
     try {
-      const res = await fetch(`${API}${API ? "/todos" : "/api/todos"}`, {
+      const res = await fetch(`${API}/todos`, {
         headers: { Authorization: `Bearer ${activeToken}` },
       });
       if (res.status === 401) {
@@ -71,7 +71,7 @@ export default function App() {
   const addTodo = async (text) => {
     if (!text.trim() || !token) return;
     try {
-      const res = await fetch(`${API}${API ? "/todos" : "/api/todos"}`, {
+      const res = await fetch(`${API}/todos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +98,7 @@ export default function App() {
     );
     try {
       const res = await fetch(
-        `${API}${API ? `/todos/${_id}/toggle` : `/api/todos/${_id}/toggle`}`,
+        `${API}/todos/${_id}/toggle`,
         { method: "PATCH", headers: { Authorization: `Bearer ${token}` } }
       );
       if (res.status === 401) {
@@ -116,7 +116,7 @@ export default function App() {
     setTodos((prev) => prev.filter((t) => t._id !== _id));
     try {
       const res = await fetch(
-        `${API}${API ? `/todos/${_id}` : `/api/todos/${_id}`}`,
+        `${API}/todos/${_id}`,
         { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
       );
       if (res.status === 401) {
@@ -134,7 +134,7 @@ export default function App() {
     setTodos((prev) => prev.filter((t) => !t.done));
     try {
       const res = await fetch(
-        `${API}${API ? "/todos?completed=true" : "/api/todos?completed=true"}`,
+        `${API}/todos?completed=true`,
         { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
       );
       if (res.status === 401) {
@@ -152,7 +152,7 @@ export default function App() {
     setLoading(true);
     setError("");
     try {
-      const base = API ? `${API}/${endpoint}` : `/api/auth/${endpoint}`;
+      const base = `${API}/auth/${endpoint}`;
       const res = await fetch(base, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "server": "node server.js",
+    "api:server": "nodemon app.js",
     "dev:server": "nodemon server.js",
     "dev:full": "concurrently \"npm run server\" \"npm run dev\""
   },
