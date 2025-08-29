@@ -19,7 +19,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const API =
-    import.meta.env.MONGODB_URI ||
+    `${import.meta.env.MONGODB_URI}/api` ||
     (window.location.hostname === "localhost" ? "http://localhost:4000/api" : "");
 
   const logout = () => {
