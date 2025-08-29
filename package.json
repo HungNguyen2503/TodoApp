@@ -4,13 +4,12 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "start":  "concurrently \"npm run server\" \"vite\"",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "server": "node server.js",
     "dev:server": "nodemon server.js",
-    "dev:full": "concurrently \"npm run dev:server\" \"npm run dev\""
+    "dev:full": "concurrently \"npm run server\" \"npm run dev\""
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -21,7 +20,8 @@
     "mongoose": "^8.18.0",
     "morgan": "^1.10.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",
