@@ -1,5 +1,9 @@
 export default function handler(_req, res) {
   return res
     .status(200)
-    .json({ ok: true, timestamp: new Date().toISOString() });
+    .json({ 
+      ok: true, 
+      timestamp: new Date().toISOString(),
+      database: 'mongodb'
+    });
 }

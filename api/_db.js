@@ -1,22 +1,29 @@
-import { readFileSync, writeFileSync, existsSync } from 'fs';
-import path from 'path';
-const baseDir = process.env.DB_FILE_DIR || (process.env.VERCEL ? '/tmp' : process.cwd());
-const dbPath = path.join(baseDir, 'db.json');
+import mongoose from 'mongoose';
 
-export function loadDB() {
-  try {
-    if (!existsSync(dbPath)) writeFileSync(dbPath, JSON.stringify({ users: [] }, null, 2));
-    return JSON.parse(readFileSync(dbPath, 'utf8'));
-  } catch (e) {
-    console.error('Failed to load DB file', e);
-    return { users: [] }; 
-  }
+// Connect to MongoDB (only connect once)
+if (!mongoose.connection.readyState) {
+  mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log('MongoDB connected successfully.'))
+    .catch(err => console.error('MongoDB connection error:', err));
 }
 
-export function saveDB(db) {
-  try {
-    writeFileSync(dbPath, JSON.stringify(db, null, 2));
-  } catch (e) {
-    console.error('Failed to write DB file', e);
-  }
-}
+// Todo Schema
+const TodoSchema = new mongoose.Schema({
+  text: { type: String, required: true },
+  done: { type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date },
+});
+
+// User Schema
+const UserSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true, lowercase: true },
+  passwordHash: { type: String, required: true },
+  token: { type: String, required: true, unique: true },
+  todos: [TodoSchema], // Embedded todos
+});
+
+// Create Models
+const User = mongoose.model('User', UserSchema);
+
+export { User };
