@@ -152,7 +152,7 @@ export default function App() {
     setLoading(true);
     setError("");
     try {
-      const base = API ? `${API}/${endpoint}` : `/api/${endpoint}`;
+      const base = API ? `${API}/${endpoint}` : `/api/auth/${endpoint}`;
       const res = await fetch(base, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
