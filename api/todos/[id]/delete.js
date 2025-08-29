@@ -1,7 +1,7 @@
 import { User } from '../../_db.js';
 
 export default async function handler(req, res) {
-  if (req.method !== 'PATCH') {
+  if (req.method !== 'DELETE') {
     return res.status(405).json({ error: 'method not allowed' });
   }
 
@@ -20,21 +20,19 @@ export default async function handler(req, res) {
 
     const { id } = req.query;
     
-    // Find todo by _id in embedded array
-    const todo = user.todos._id(id);
+    // Find and remove todo by _id
+    const todo = user.todos.id(id);
     if (!todo) {
-      return res.status(404).json({ error: 'not found' });
+      return res.status(404).json({ error: 'todo not found' });
     }
 
-    // Toggle done status
-    todo.done = !todo.done;
-    todo.updatedAt = new Date();
-    
+    // Remove the todo from embedded array
+    todo.deleteOne();
     await user.save();
     
-    return res.json(todo);
+    return res.status(204).end();
   } catch (error) {
-    console.error('Toggle todo error:', error);
+    console.error('Delete todo error:', error);
     return res.status(500).json({ error: 'server error' });
   }
 }
