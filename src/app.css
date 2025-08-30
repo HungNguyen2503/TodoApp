@@ -375,6 +375,7 @@ h1 {
   border-radius: var(--radius-md);
   outline: none;
   font-size: 0.95rem;
+  color: var(--text);
 }
 .auth-form input:focus {
   border-color: var(--accent);

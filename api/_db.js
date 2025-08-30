@@ -17,10 +17,20 @@ async function dbConnect() {
     return cached.conn;
   }
 
+  // if (!cached.promise) {
+  //   cached.promise = mongoose.connect(MONGODB_URI, {
+  //     bufferCommands: false,
+  //   }).then((mongoose) => {
+  //     console.log('MongoDB connected successfully.');
+  //     return mongoose;
+  //   });
+  // }
   if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI, {
+    const opts = {
       bufferCommands: false,
-    }).then((mongoose) => {
+      serverSelectionTimeoutMS: 30000, // Chờ 30 giây thay vì 10 giây mặc định
+    };
+    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
       console.log('MongoDB connected successfully.');
       return mongoose;
     });
