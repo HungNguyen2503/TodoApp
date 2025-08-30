@@ -18,10 +18,9 @@ export default function App() {
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const API =
-    `${import.meta.env.MONGODB_URI}/api` ||
-    (window.location.hostname === "localhost" ? "http://localhost:4000/api" : "");
-
+  const API = `${import.meta.env.VITE_API_BASE_URL}` || `/api`;
+  
+  
   const logout = () => {
     setToken("");
     setUsername("");
@@ -134,7 +133,7 @@ export default function App() {
     setTodos((prev) => prev.filter((t) => !t.done));
     try {
       const res = await fetch(
-        `${API}/todos?completed=true`,
+        `${API}/todos/completed`,
         { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
       );
       if (res.status === 401) {
@@ -160,7 +159,7 @@ export default function App() {
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok)
-        throw new Error(data.error || res.status + " " + res.statusText);
+        throw new Error(data.error.message);
       setToken(data.token);
       setUsername(data.username);
       localStorage.setItem("token", data.token);

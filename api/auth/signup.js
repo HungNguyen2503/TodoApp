@@ -31,13 +31,12 @@ export default async function handler(req, res) {
       passwordHash,
       todos: [],
     });
+    const token = createToken(user._id);
     await user.save();
     
-    const token = createToken(user._id);
-
     return sendJSON(res, 201, { token, username: user.username });
   } catch (error) {
-    console.error('Signup error:', error);
+    // console.error('Signup error:', error);
     return sendError(res, 500, 'Server error during signup.');
   }
 }

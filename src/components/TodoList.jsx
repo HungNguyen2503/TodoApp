@@ -13,9 +13,10 @@ export default function TodoList({ todos, onToggle, onDelete }) {
   return (
     <motion.ul className="todo-list" layout>
       <AnimatePresence initial={false}>
-        {[...todos].reverse().map(todo => (
+        {[...todos].reverse().map(todo => {
+          return(
           <motion.li
-            key={todo.id}
+            key={todo._id}
             layout
             className={todo.done ? 'done' : ''}
             variants={variants}
@@ -29,8 +30,10 @@ export default function TodoList({ todos, onToggle, onDelete }) {
               <span>{todo.text}</span>
             </label>
             <motion.button whileTap={{ scale: 0.85 }} whileHover={{ rotate: 90 }} className="delete" onClick={() => onDelete(todo._id)} aria-label="Delete todo">✕</motion.button>
-          </motion.li>
-        ))}
+          </motion.li>            
+          )
+
+        })}
       </AnimatePresence>
     </motion.ul>
   );

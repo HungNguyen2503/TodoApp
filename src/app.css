@@ -170,6 +170,7 @@ h1 {
   flex: 1;
   padding: 14px 16px;
   border: 1px solid var(--border);
+  color: var(--text);
   background: var(--bg);
   border-radius: var(--radius-md);
   font-size: 1rem;
