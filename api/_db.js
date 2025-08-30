@@ -17,24 +17,19 @@ async function dbConnect() {
     return cached.conn;
   }
 
-  // if (!cached.promise) {
-  //   cached.promise = mongoose.connect(MONGODB_URI, {
-  //     bufferCommands: false,
-  //   }).then((mongoose) => {
-  //     console.log('MongoDB connected successfully.');
-  //     return mongoose;
-  //   });
-  // }
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-      serverSelectionTimeoutMS: 30000, // Chờ 30 giây thay vì 10 giây mặc định
-    };
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      console.log('MongoDB connected successfully.');
-      return mongoose;
-    });
-  }
+if (!cached.promise) {
+  // Thêm các tùy chọn để tăng thời gian chờ
+  const opts = {
+    bufferCommands: false,
+    serverSelectionTimeoutMS: 30000, // Chờ 30 giây (quan trọng nhất)
+    socketTimeoutMS: 45000, // Đóng socket sau 45 giây không hoạt động
+  };
+
+  cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+    console.log('MongoDB connected successfully.');
+    return mongoose;
+  });
+}
   
   try {
     cached.conn = await cached.promise;
