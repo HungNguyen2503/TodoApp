@@ -18,7 +18,7 @@ export default function App() {
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const API = `${import.meta.env.VITE_API_BASE_URL}` || `/api`;
+  const API = import.meta.env.VITE_API_BASE_URL || `/api`;
   
   
   const logout = () => {
