@@ -97,7 +97,7 @@ export default function App() {
     );
     try {
       const res = await fetch(
-        `${API}/todos/${_id}/toggle`,
+        `${API}/todos/${_id}`,
         { method: "PATCH", headers: { Authorization: `Bearer ${token}` } }
       );
       if (res.status === 401) {

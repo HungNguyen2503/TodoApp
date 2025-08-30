@@ -35,7 +35,7 @@ app.delete('/api/todos/completed', completedTodosHandler);
 
 // Route cho một todo cụ thể (với tham số động)
 // Express sử dụng cú pháp :id thay cho [id]
-app.patch('/api/todos/:id/toggle', todoByIdHandler);
+app.patch('/api/todos/:id', todoByIdHandler);
 app.delete('/api/todos/:id', todoByIdHandler);
 
 // Xử lý route không tồn tại
